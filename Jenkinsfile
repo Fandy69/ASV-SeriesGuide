@@ -25,5 +25,22 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('SonarQube Analysis') {
+             environment {
+                 SONARSCANNER_HOME = tool 'SonarQube'
+             }
+             steps {
+                  tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                  withSonarQubeEnv('SonarQube') {
+                      bat "set"
+                      bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
+                      -D sonar.login=admin \
+                      -D sonar.password=admin \
+                      -D sonar.projectKey=ASV-SeriesGuide \
+                      -D sonar.exclusions=**/*.java \
+                      -D sonar.host.url=http://localhost:9000/"
+                  }
+             }
+        }
     }
 }
