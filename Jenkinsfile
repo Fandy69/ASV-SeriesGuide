@@ -37,8 +37,8 @@ pipeline {
              steps {
                   tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                   withSonarQubeEnv('SonarQube') {
-                      bat "set"
-                      bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
+                      sh "set"
+                      sh "${SONARSCANNER_HOME}/bin/sonar-scanner \
                       -D sonar.login=admin \
                       -D sonar.password=admin \
                       -D sonar.projectKey=ASV-SeriesGuide \
