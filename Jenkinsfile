@@ -4,7 +4,7 @@ pipeline {
     environment {
             ANDROID_SDK_ROOT = 'c:\\users\\fback\\AppData\\Local\\Android\\Sdk'
             JAVA_HOME = '/opt/java/openjdk'
-            GRADLE_USER_HOME = 'c:\\mel\\tools\\Gradle'
+            GRADLE_USER_HOME = '/var/jenkins_home/workspace'
         }
 
     stages {
