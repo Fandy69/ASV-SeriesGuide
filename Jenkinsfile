@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-
+    agent {
+        any
+    }
     environment {
             ANDROID_SDK_ROOT = 'c:\\users\\fback\\AppData\\Local\\Android\\Sdk'
             JAVA_HOME = '/usr/lib/jvm/java-11-openjdk-amd64/bin/java'
