@@ -3,7 +3,7 @@ pipeline {
 
     environment {
             ANDROID_SDK_ROOT = 'c:\\users\\fback\\AppData\\Local\\Android\\Sdk'
-            JAVA_HOME = 'c:\\Program Files\\Java\\jdk-11.0.15'
+            JAVA_HOME = '/opt/java/openjdk'
             GRADLE_USER_HOME = 'c:\\mel\\tools\\Gradle'
         }
 
