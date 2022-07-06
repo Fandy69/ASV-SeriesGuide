@@ -11,22 +11,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'building....'
-                sh "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+                bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
             }
         }
         stage('Test build') {
             steps {
                 echo 'Test Build with Coverage'
-                // bat "set"
+                bat "set"
                 // bat "gradlew app:assembleAndroidTest"
-                sh "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
+                bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
             }
         }
         
         stage('Test') {
             steps {
                 echo 'test'
-                sh "gradlew app:testPureDebugUnitTest"
+                bat "gradlew app:testPureDebugUnitTest"
             }
         }
         
@@ -37,8 +37,8 @@ pipeline {
              steps {
                   tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                   withSonarQubeEnv('SonarQube') {
-                      sh "set"
-                      sh "${SONARSCANNER_HOME}/bin/sonar-scanner \
+                      bat "set"
+                      bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
                       -D sonar.login=admin \
                       -D sonar.password=admin \
                       -D sonar.projectKey=ASV-SeriesGuide \
