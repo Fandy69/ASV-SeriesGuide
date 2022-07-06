@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-            ANDROID_SDK_ROOT = 'c:\\users\\fback\\AppData\\Local\\Android\\Sdk'
-            JAVA_HOME = '/usr/lib/jvm/java-11-openjdk-amd64/bin/java'
-            GRADLE_USER_HOME = '/var/jenkins_home/workspace'
+            ANDROID_SDK_ROOT = 'C:\\users\\FandyBackers\\AppData\\Local\\Android\\Sdk'
+            JAVA_HOME = 'C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin'
+            GRADLE_USER_HOME = 'C:\\Gradle'
         }
 
     stages {
