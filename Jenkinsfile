@@ -39,8 +39,8 @@ pipeline {
                   withSonarQubeEnv('SonarQube') {
                       bat "set"
                       bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
-                      -D sonar.login=admin \
-                      -D sonar.password=admin \
+                      -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
+                      //-D sonar.password=admin \
                       -D sonar.projectKey=ASV-SeriesGuide \
                       -D sonar.exclusions=**/*.java \
                       -D sonar.host.url=http://localhost:9000/"
