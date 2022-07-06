@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-            ANDROID_SDK_ROOT = 'C:\\users\\FandyBackers\\AppData\\Local\\Android\\Sdk'
+            ANDROID_SDK_ROOT = 'C:\\Users\\FandyBackers\\AppData\\Local\\Android\\Sdk'
             JAVA_HOME = 'C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin'
             GRADLE_USER_HOME = 'C:\\Gradle'
         }
