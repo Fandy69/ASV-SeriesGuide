@@ -30,6 +30,14 @@ pipeline {
             }
         }
         
+        stage("Check Quality and Coverage") {
+                  steps{
+                   bat "gradlew jacocoTestReport sonarqube -x check"
+                   step( [$class: 'JacocoPublisher',
+                          exclusionPattern: '**/*Exception*,**/*Configuration*,**/ApiApplication*'] )
+                  }
+            }        
+        
         stage('SonarQube Analysis') {
              environment {
                  SONARSCANNER_HOME = tool 'SonarQube'
@@ -42,6 +50,7 @@ pipeline {
                       -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
                       -D sonar.projectKey=ASV-SeriesGuide \
                       -D sonar.java.binaries=** \
+                      -D sonar.jacoco.excludes=*/exceptions/*:*/dto/* \
                       -D sonar.host.url=http://192.168.2.86:9000/"
                   }
              }
