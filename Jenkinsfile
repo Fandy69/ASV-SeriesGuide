@@ -42,7 +42,8 @@ pipeline {
                       -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
                       -D sonar.projectKey=ASV-SeriesGuide \
                       -D sonar.java.binaries=** \
-                      -D sonar.exclusions=gradle/**/* \
+                      -D sonar.exclusions=gradle/**/*, wrapper/**/* \
+                      -D sonar.inclusions=app/**/*, billing/**/*, widgets/**/*, api/**/* \
                       -D sonar.host.url=http://localhost:9000/"
                   }
              }
