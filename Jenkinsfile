@@ -41,6 +41,7 @@ pipeline {
                       bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
                       -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
                       -D sonar.projectKey=ASV-SeriesGuide \
+                      -D sonar.java.binaries=** \
                       -D sonar.host.url=http://localhost:9000/"
                   }
              }
