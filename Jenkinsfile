@@ -26,11 +26,10 @@ pipeline {
         
         stage('Test Coverage') {
             steps {
-                junit '**/build/test-results/**/*.xml'
+                junit '*/build/test-results/*.xml'
                 jacoco()
-                step( publishCoverage(
-                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
-                )
+
+                step( [ $class: 'JacocoPublisher' ] )
             }
         }
         
