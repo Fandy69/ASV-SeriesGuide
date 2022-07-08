@@ -78,7 +78,18 @@ nexusPublishing {
     }
 }
 
-tasks.jacocoTestReport {
+fun JacocoReportsContainer.reports() {
+    xml.isEnabled = true
+    csv.isEnabled = false
+    html.isEnabled = true
+    xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
+    html.destination = file("${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+}
+
+
+
+tasks.jacocoTestReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
     reports {
         xml.required.set(true)
         xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
