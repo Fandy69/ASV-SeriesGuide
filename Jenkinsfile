@@ -15,6 +15,12 @@ pipeline {
                 bat "gradlew app:testPureDebugUnitTest"
             }
         }        
+
+        stage('Report') {
+            steps {
+                step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            }
+        }        
         
         stage('Test build') {
             steps {
@@ -26,11 +32,7 @@ pipeline {
         
 
         
-        stage('Report') {
-            steps {
-                step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-            }
-        }
+
         
         stage('Artifact') {
             steps {
