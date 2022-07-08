@@ -9,6 +9,11 @@ pipeline {
 
     stages {
 
+        stage('Clean up') {
+            steps {
+                bat "gradlew clean"
+            }
+        }
 //         stage('Build') {
 //             steps {
 //                 echo 'building....'
