@@ -98,8 +98,8 @@ tasks.jacocoTestCoverageVerification {
   violationRules {
     rule {
       limit {
-        counter.set('LINE')
-        value.set('COVEREDRATIO')
+        counter.set("LINE")
+        value.set("COVEREDRATIO")
         minimum.set(1.0)
       }
     }
