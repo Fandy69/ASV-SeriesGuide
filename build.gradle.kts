@@ -82,9 +82,6 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-test {
-  useJUnitPlatform()
-}
 
 
 
