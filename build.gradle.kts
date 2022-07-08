@@ -4,7 +4,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.42.0"
     // https://github.com/gradle-nexus/publish-plugin/releases
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
-
+    id("java")
     id("jacoco")
 }
 
@@ -51,17 +51,6 @@ buildscript {
         classpath("org.jacoco:org.jacoco.ant:0.8.5")
     }
 }
-
-tasks.jacocoTestReport {
-    reports {
-        xml.required.set(true)
-        csv.required.set(false)
-        html.required.set(true)
-        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-    }
-}
-
-
 
 
 fun isNonStable(version: String): Boolean {
