@@ -26,11 +26,7 @@ pipeline {
             }
         }
         
-        stage('Test Coverage') {
-            steps {
-                junit '**/build/test-results/**/*.xml'
-            }
-        }
+
         
         stage('Report') {
             steps {
