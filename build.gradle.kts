@@ -78,15 +78,20 @@ nexusPublishing {
     }
 }
 
-
+tasks.test {
+    seJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
 
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
         xml.required.set(true)
         xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
+    executionData.setFrom("build/jacoco/testPureDebugUnitTest.exec")
 }
 
 
