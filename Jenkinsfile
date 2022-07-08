@@ -27,12 +27,10 @@ pipeline {
 
         
         stage("Check Quality and Coverage") {
-                  steps{
-                   bat "gradlew jacocoTestReport sonarqube -x check"
-                   step( [$class: 'JacocoPublisher',
-                          exclusionPattern: '**/*Exception*,**/*Configuration*,**/ApiApplication*'] )
-                  }
-            }        
+            steps{
+                bat "gradlew jacocoTestReport sonarqube -x check"
+            }
+        }        
         
         stage('SonarQube Analysis') {
              environment {
