@@ -9,6 +9,13 @@ pipeline {
 
     stages {
 
+        stage('Build') {
+            steps {
+                echo 'building....'
+                bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+            }
+        }
+        
         stage('Test') {
             steps {
                 echo 'test'
