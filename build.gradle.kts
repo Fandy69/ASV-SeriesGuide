@@ -94,7 +94,17 @@ tasks.jacocoTestReport {
     executionData.setFrom("build/jacoco/testPureDebugUnitTest.exec")
 }
 
-
+jacocoTestCoverageVerification {
+  violationRules {
+    rule {
+      limit {
+        counter = 'LINE'
+        value = 'COVEREDRATIO'
+        minimum = 1.0
+      }
+    }
+  }
+}
 
 
 // tasks.register("clean", Delete::class) {
