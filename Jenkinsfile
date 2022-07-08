@@ -34,12 +34,6 @@ pipeline {
             }
         }
         
-        stage('Report') {
-            steps {
-                step([$class: 'JUnitResultArchiver', testResults: 'build/reports/jacoco/test/jacocoTestReport.xml'])
-            }
-        }    
-
         stage('SonarQube Analysis') {
              environment {
                  SONARSCANNER_HOME = tool 'SonarQube'
