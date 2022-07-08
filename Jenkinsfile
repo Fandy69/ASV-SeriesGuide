@@ -27,8 +27,10 @@ pipeline {
         stage('Test Coverage') {
             steps {
                 junit '**/build/test-results/**/*.xml'
-                jacoco runAlways: true
-
+                jacoco(
+                    execPattern: '**/build/jacoco/**.exec'
+                )
+                step( [ $class: 'JacocoPublisher' ] )
                 publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
             }
@@ -69,7 +71,7 @@ pipeline {
     
   post {
     always {
-      junit(testResults: 'build/test-results/*.xml', allowEmptyResults : true)
+      junit(testResults: '**/build/test-results/**/*.xml', allowEmptyResults : true)
     }
   }    
     
