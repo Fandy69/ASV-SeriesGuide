@@ -82,36 +82,21 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-tasks.jacocoTestReport {
+
+
+jacocoTestReport {
     reports {
-        xml.required.set(true)
-        xml.outputLocation.set(layout.buildDirectory.dir("jacocoXml"))
+        xml.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        xml.outputLocation = layout.buildDirectory.dir('jacocoXml')
     }
 }
 
 
 
-tasks.jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                minimum = "0.5".toBigDecimal()
-            }
-        }
 
-        rule {
-            isEnabled = false
-            element = "CLASS"
-            includes = listOf("org.gradle.*")
 
-            limit {
-                counter = "LINE"
-                value = "TOTALCOUNT"
-                maximum = "0.3".toBigDecimal()
-            }
-        }
-    }
-}
+
 
 
 
