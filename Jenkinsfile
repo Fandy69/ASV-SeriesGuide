@@ -38,16 +38,10 @@ pipeline {
         
         stage('Report') {
             steps {
-                step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+                step([$class: 'JUnitResultArchiver', testResults: 'build/reports/jacoco/test/jacocoTestReport.xml'])
             }
         }    
-        
-        stage('Artifact') {
-            steps {
-                step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-            }
-        }  
-        
+
         stage('SonarQube Analysis') {
              environment {
                  SONARSCANNER_HOME = tool 'SonarQube'
