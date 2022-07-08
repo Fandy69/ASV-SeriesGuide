@@ -86,17 +86,9 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        xml.required = true
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-        xml.outputLocation = layout.buildDirectory.dir('jacocoXml')
+        xml.enabled true
     }
 }
-
-
-
-
-
-
 
 
 
