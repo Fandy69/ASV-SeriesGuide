@@ -83,6 +83,7 @@ nexusPublishing {
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
+        xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
