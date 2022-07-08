@@ -21,12 +21,12 @@ pipeline {
 //             }
 //         }
         
-//         stage('Test') {
-//             steps {
-//                 echo 'test'
-//                 bat "gradlew app:testPureDebugUnitTest"
-//             }
-//         }        
+        stage('Test') {
+            steps {
+                echo 'test'
+                bat "gradlew app:testPureDebugUnitTest"
+            }
+        }        
 
         stage('Test build') {
             steps {
