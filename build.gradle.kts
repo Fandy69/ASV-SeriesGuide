@@ -4,8 +4,8 @@ plugins {
     id("com.github.ben-manes.versions") version "0.42.0"
     // https://github.com/gradle-nexus/publish-plugin/releases
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
-    //id("java")
-    //id("jacoco")
+    id("java")
+    id("jacoco")
 }
 
 buildscript {
@@ -91,10 +91,10 @@ tasks.jacocoTestReport {
 
 
 
-tasks.register("clean", Delete::class) {
-    group = "build"
-    delete(rootProject.buildDir)
-}
+// tasks.register("clean", Delete::class) {
+//     group = "build"
+//     delete(rootProject.buildDir)
+// }
 
 tasks.wrapper {
     //noinspection UnnecessaryQualifiedReference
