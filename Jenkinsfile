@@ -31,7 +31,7 @@ pipeline {
                     execPattern: '**/build/jacoco/**.exec'
                 )
                 jacocoTestReport()
-                step( [ $class: 'JacocoPublisher' ] )
+
                 publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
             }
