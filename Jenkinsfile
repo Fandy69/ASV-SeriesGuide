@@ -30,7 +30,7 @@ pipeline {
 
         stage('Test build') {
             steps {
-                echo 'Test Build with Coverage'
+                echo 'Test Build'
                 bat "set"
                 bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
             }
@@ -38,11 +38,12 @@ pipeline {
         
         stage('Test Coverage') {
             steps {
+                echo 'Test Build with Coverage'
                 junit '**/build/test-results/**/*.xml'
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )
-                bat "gradlew jacocoTestReport"
+                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
 
                 publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
