@@ -16,11 +16,7 @@ pipeline {
             }
         }        
 
-        stage('Report') {
-            steps {
-                step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-            }
-        }        
+    
         
         stage('Test build') {
             steps {
@@ -30,9 +26,17 @@ pipeline {
             }
         }
         
-
+        stage('Test Coverage') {
+            steps {
+                junit '**/build/test-results/**/*.xml'
+            }
+        }
         
-
+        stage('Report') {
+            steps {
+                step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            }
+        }    
         
         stage('Artifact') {
             steps {
