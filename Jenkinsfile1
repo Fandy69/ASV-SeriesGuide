@@ -30,14 +30,13 @@ pipeline {
             }
         }
         
-        stage("Check Quality and Coverage") {
-                  steps{
-                  jacoco()
-                   bat "gradlew jacocoTestReport sonarqube -x check"
-                   step( [$class: 'JacocoPublisher',
-                          exclusionPattern: '**/*Exception*,**/*Configuration*,**/ApiApplication*'] )
-                  }
-            }        
+        
+        stage 'report' {
+            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+        }
+        stage 'Artifact' {
+            step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])        
+        }
         
         stage('SonarQube Analysis') {
              environment {
@@ -71,5 +70,5 @@ pipeline {
             }
         }        
         
-    }
+    }    
 }
