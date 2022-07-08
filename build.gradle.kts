@@ -77,22 +77,6 @@ nexusPublishing {
 }
 
 
-
-jacoco {
-    toolVersion = "3.3.2"
-    reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
-}
-
-jacocoTestReport {
-   dependsOn test
-   reports {
-       xml.enabled true
-       csv.enabled true
-   }
-}
-
-
-
 tasks.register("clean", Delete::class) {
     group = "build"
     delete(rootProject.buildDir)
