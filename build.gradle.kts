@@ -82,11 +82,24 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-
-
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml {
+            enabled true // coveralls plugin depends on xml format report
+        }
+
+        html {
+            enabled true
+        }
+    }
+
+    test {
+        jacoco {
+            destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+            classDumpFile = file("$buildDir/jacoco/classpathdumps")
+            excludes = ["projecteuler/**"] // <-- does not work
+            // excludes = ["projecteuler"]
+        }
     }
 }
 
