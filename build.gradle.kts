@@ -80,6 +80,16 @@ nexusPublishing {
 
 
 
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+}
+
+
+
 
 tasks.register("clean", Delete::class) {
     group = "build"
