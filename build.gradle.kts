@@ -83,13 +83,17 @@ jacoco {
 }
 
 
-tasks.test() {
-    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+jacocoTestReport {
+    reports {
+        xml { enabled true }
+        html { enabled true }
+    }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/config/**', '**/entity/**'])
+        })
+    }
 }
-tasks.jacocoTestReport() {
-    dependsOn(tasks.test) // tests are required to run before generating the report
-}
-
 
 
 
