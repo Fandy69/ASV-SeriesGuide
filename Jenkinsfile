@@ -26,7 +26,8 @@ pipeline {
         
         stage('Test Coverage') {
             steps {
-                junit '**/build/test-results/**/*.xml'
+                // junit '**/build/test-results/**/*.xml'
+                junit 'build/test-results/*.xml'
                 jacoco()
 
                 publishCoverage(
