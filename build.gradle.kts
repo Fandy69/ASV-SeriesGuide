@@ -79,7 +79,7 @@ nexusPublishing {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
 
