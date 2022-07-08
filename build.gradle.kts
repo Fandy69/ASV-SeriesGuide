@@ -78,6 +78,17 @@ nexusPublishing {
     }
 }
 
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
+        csv.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+    enabled = true
+}
+
 
 //tasks.register("clean", Delete::class) {
 //    group = "build"
