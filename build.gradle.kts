@@ -59,11 +59,11 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
-    jacoco {
-        append = false
-        destinationFile = file("$buildDir/jacoco/TestNG.exec")
-        //classDumpFile = file("$buildDir/jacoco/classpathdumps")
-    }
+//     jacoco {
+//         append = false
+//         destinationFile = file("$buildDir/jacoco/TestNG.exec")
+//         //classDumpFile = file("$buildDir/jacoco/classpathdumps")
+//     }
 
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
