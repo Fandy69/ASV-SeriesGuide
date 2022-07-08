@@ -27,9 +27,7 @@ pipeline {
         stage('Test Coverage') {
             steps {
                 junit '**/build/test-results/**/*.xml'
-                jacoco(
-                    execPattern: '**/build/jacoco/**.exec'
-                )
+                jacoco()
                 step( publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
                 )
