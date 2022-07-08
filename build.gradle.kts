@@ -78,23 +78,42 @@ nexusPublishing {
 
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "3.3.2"
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-
 tasks.jacocoTestReport {
     reports {
-        xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/report.xml")
-        html.enabled true
-        csv.enabled true
+        xml.required.set(true)
+        xml.outputLocation.set(layout.buildDirectory.dir("jacocoXml"))
     }
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 }
+
+
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.5".toBigDecimal()
+            }
+        }
+
+        rule {
+            isEnabled = false
+            element = "CLASS"
+            includes = listOf("org.gradle.*")
+
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = "0.3".toBigDecimal()
+            }
+        }
+    }
+}
+
+
 
 tasks.register("clean", Delete::class) {
     group = "build"
