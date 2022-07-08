@@ -84,8 +84,13 @@ jacoco {
 }
 
 jacocoTestReport {
-    jacocoClasspath = project.buildscript.configurations.classpath
+   dependsOn test
+   reports {
+       xml.enabled true
+       csv.enabled true
+   }
 }
+
 
 
 tasks.register("clean", Delete::class) {
