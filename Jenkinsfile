@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // junit '**/build/test-results/**/*.xml'
                 junit 'build/test-results/*.xml'
-                jacoco()
+                jacoco runAlways: true
 
                 publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
