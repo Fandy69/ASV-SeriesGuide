@@ -82,23 +82,20 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled true
-        html.destination file("$buildDir/reports/jacoco")
+tasks.jacocoTestReport {
+    // tests are required to run before generating the report
+    dependsOn(tasks.test) 
+    // print the report url for easier access
+    doLast {
+        println("file://${project.rootDir}/build/reports/jacoco/test/html/index.html")
     }
-
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it,
-                    exclude: ['**/server/**',
-                              '**/model/**',
-                              '**/command/**'
-                    ]
-            )
-        }))
-    }
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it) {
+                exclude("**/generated/**", "**/other-excluded/**")
+            }
+        })
+    )
 }
 
 
