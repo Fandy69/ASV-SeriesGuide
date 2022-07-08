@@ -37,7 +37,7 @@ pipeline {
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )
-                jacocoTestReport()
+                bat "gradlew jacocoTestReport"
 
                 publishCoverage(
                     adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
