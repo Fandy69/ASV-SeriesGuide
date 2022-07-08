@@ -94,7 +94,7 @@ tasks.jacocoTestReport {
     executionData.setFrom("build/jacoco/testPureDebugUnitTest.exec")
 }
 
-jacocoTestCoverageVerification {
+tasks.jacocoTestCoverageVerification {
   violationRules {
     rule {
       limit {
