@@ -85,8 +85,8 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        xml { enabled true }
-        html { enabled true }
+        xml { enabled = true }
+        html { enabled = true }
     }
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
