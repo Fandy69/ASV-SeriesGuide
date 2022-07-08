@@ -88,11 +88,7 @@ jacocoTestReport {
         xml { enabled = true }
         html { enabled = true }
     }
-    afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/config/**', '**/entity/**'])
-        })
-    }
+
 }
 
 
