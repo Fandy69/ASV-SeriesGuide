@@ -81,14 +81,14 @@ jacoco {
     toolVersion = "3.3.2"
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
-
-
+// Test coverage reporting
 jacocoTestReport {
+    // Enable xml for coveralls.
     reports {
-        xml { enabled = true }
-        html { enabled = true }
+        html.enabled = true
+        xml.enabled = true
+        xml.setDestination(file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
     }
-
 }
 
 
