@@ -4,8 +4,8 @@ plugins {
     id("com.github.ben-manes.versions") version "0.42.0"
     // https://github.com/gradle-nexus/publish-plugin/releases
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
-    id("java")
-    id("jacoco")
+    //id("java")
+    //id("jacoco")
 }
 
 buildscript {
@@ -48,7 +48,7 @@ buildscript {
         // https://firebase.google.com/support/release-notes/android
         classpath("com.google.gms:google-services:4.3.10")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
-        classpath("org.jacoco:org.jacoco.ant:0.8.5")
+        //classpath("org.jacoco:org.jacoco.ant:0.8.5")
     }
 }
 
@@ -78,27 +78,7 @@ nexusPublishing {
     }
 }
 
-fun JacocoReportsContainer.reports() {
-    xml.isEnabled = true
-    csv.isEnabled = false
-    html.isEnabled = true
-    xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
-    html.destination = file("${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
-}
 
-
-
-tasks.jacocoTestReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-    reports {
-        xml.required.set(true)
-        xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
-        csv.required.set(false)
-        html.required.set(true)
-        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-    }
-    enabled = true
-}
 
 
 //tasks.register("clean", Delete::class) {
