@@ -86,7 +86,7 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml.enabled = true
     }
 }
 
