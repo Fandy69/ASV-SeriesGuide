@@ -82,21 +82,15 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
-tasks.jacocoTestReport {
-    // tests are required to run before generating the report
-    dependsOn(tasks.test) 
-    // print the report url for easier access
-    doLast {
-        println("file://${project.rootDir}/build/reports/jacoco/test/html/index.html")
-    }
-    classDirectories.setFrom(
-        files(classDirectories.files.map {
-            fileTree(it) {
-                exclude("**/generated/**", "**/other-excluded/**")
-            }
-        })
-    )
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
+
 
 
 tasks.register("clean", Delete::class) {
