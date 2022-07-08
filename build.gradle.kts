@@ -59,6 +59,12 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/TestNG.exec")
+        //classDumpFile = file("$buildDir/jacoco/classpathdumps")
+    }
+
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
         isNonStable(candidate.version)
@@ -94,17 +100,25 @@ tasks.jacocoTestReport {
     executionData.setFrom("build/jacoco/testPureDebugUnitTest.exec")
 }
 
-// tasks.jacocoTestCoverageVerification {
-//   violationRules {
-//     rule {
-//       limit {
-//         counter.set("LINE")
-//         value.set("COVEREDRATIO")
-//         minimum.set(1.0)
-//       }
-//     }
-//   }
-// }
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.9".toBigDecimal()
+            }
+        }
+    }
+}
+
+val testCoverage by tasks.registering {
+    group = "verification"
+    description = "Runs the unit tests with coverage."
+
+    dependsOn(":test", ":jacocoTestReport", ":jacocoTestCoverageVerification")
+    val jacocoTestReport = tasks.findByName("jacocoTestReport")
+    jacocoTestReport?.mustRunAfter(tasks.findByName("test"))
+    tasks.findByName("jacocoTestCoverageVerification")?.mustRunAfter(jacocoTestReport)
+}
 
 
 // tasks.register("clean", Delete::class) {
