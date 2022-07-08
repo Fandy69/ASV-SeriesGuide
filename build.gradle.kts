@@ -5,6 +5,7 @@ plugins {
     // https://github.com/gradle-nexus/publish-plugin/releases
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
     jacoco
+    id("com.github.nbaztec.coveralls-jacoco")
 }
 
 buildscript {
