@@ -84,7 +84,7 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
-    dependsOn(tasks.test)
+    //dependsOn(tasks.test)
     reports {
         xml.required.set(true)
         xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
