@@ -16,8 +16,6 @@ pipeline {
             }
         }        
 
-    
-        
         stage('Test build') {
             steps {
                 echo 'Test Build with Coverage'
@@ -26,7 +24,17 @@ pipeline {
             }
         }
         
-
+        stage('Test Coverage') {
+            steps {
+                junit '**/build/test-results/**/*.xml'
+                jacoco(
+                    execPattern: '**/build/jacoco/**.exec'
+                )
+                step( publishCoverage(
+                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
+                )
+            }
+        }
         
         stage('Report') {
             steps {
