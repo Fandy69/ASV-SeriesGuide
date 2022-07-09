@@ -127,6 +127,11 @@ val testCoverage by tasks.registering {
 //     delete(rootProject.buildDir)
 // }
 
+tasks.register("Custclean", Delete::class) {
+    group = "build"
+    delete(rootProject.buildDir)
+}
+
 tasks.wrapper {
     //noinspection UnnecessaryQualifiedReference
     distributionType = Wrapper.DistributionType.ALL
