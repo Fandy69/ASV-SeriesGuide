@@ -60,6 +60,17 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
+private val fileFilter = mutableSetOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*",
+        "**/*\$Lambda$*.*", // Jacoco can not handle several "$" in class name.
+        "**/*\$inlined$*.*" // Kotlin specific, Jacoco can not handle several "$" in class name.
+)
+
 private val classDirectoriesTree = fileTree(project.buildDir) {
     include(
             "**/classes/**/main/**",
