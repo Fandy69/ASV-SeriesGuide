@@ -37,6 +37,7 @@ pipeline {
                 bat "gradlew app:testPureDebugUnitTest"
             }
         }
+
         
         stage('Test Pure Coverage reports') {
             steps {
@@ -45,7 +46,7 @@ pipeline {
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )
-                bat "gradlew jacocoTestReport --info"
+                bat "gradlew build jacocoTestReport --info"
 //                step( publishCoverage(
 //                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
 //                )
