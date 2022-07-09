@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'test'
-                //bat "gradlew app:testPureDebugUnitTest"
+                bat "gradlew app:testPureDebugUnitTest"
             }
         }        
 
