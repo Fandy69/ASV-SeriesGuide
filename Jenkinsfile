@@ -24,6 +24,9 @@ pipeline {
         stage('Test with Coverage') {
             steps {
                 echo 'Test Build with Coverage'
+                jacoco(
+                    execPattern: '**/build/jacoco/**.exec'
+                )                
                 bat "gradlew app:testPureDebugUnitTest jacocoTestReport --info"
             }
         }        
@@ -31,10 +34,6 @@ pipeline {
         stage('Publish Coverage') {
             steps {
                 echo 'Publish Coverage'
-                jacoco(
-                    execPattern: '**/build/jacoco/**.exec'
-                )
-                
                 publishCoverage(
                     adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
                 
