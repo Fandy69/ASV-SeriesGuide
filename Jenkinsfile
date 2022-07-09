@@ -27,7 +27,7 @@ pipeline {
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )                
-                bat "gradlew app:testPureDebugUnitTest jacocoTestReport --info"
+                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
             }
         }        
 
