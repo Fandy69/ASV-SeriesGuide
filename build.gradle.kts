@@ -81,16 +81,16 @@ nexusPublishing {
 
 jacoco {
     toolVersion = "0.8.8"
-    reportsDirectory.set(layout.buildDirectory.dir("${buildDir}\\jacoco\\"))
+//     reportsDirectory.set(layout.buildDirectory.dir("${buildDir}\\jacoco\\"))
 }
 
-tasks.test {
-    //useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+tasks.withType<Test> {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+    }
 }
 
 tasks.jacocoTestReport {
-    //dependsOn(tasks.test)
     reports {
         xml.required.set(true)
         xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
