@@ -96,7 +96,7 @@ tasks.jacocoTestReport {
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
-    executionData.setFrom(fileTree(projectDir) { include ("${projectDir}\\**\\build\\jacoco\\*.exec") })
+    executionData.setFrom(fileTree(projectDir) { include ("**\\build\\jacoco\\*.exec") })
 }
 
 tasks.jacocoTestCoverageVerification {
