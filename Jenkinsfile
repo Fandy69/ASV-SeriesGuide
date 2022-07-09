@@ -9,17 +9,17 @@ pipeline {
 
     stages {
 
-        stage('Clean up') {
-            steps {
-                bat "gradlew widgets:clean billing:clean api:clean app:clean"
-            }
-        }
-//         stage('Build') {
+//         stage('Clean up') {
 //             steps {
-//                 echo 'building....'
-//                 bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+//                 bat "gradlew widgets:clean billing:clean api:clean app:clean"
 //             }
 //         }
+        stage('Build') {
+            steps {
+                echo 'building....'
+                bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+            }
+        }
         
         stage('Test with Coverage') {
             steps {
