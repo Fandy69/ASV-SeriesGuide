@@ -60,6 +60,43 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
+private val classDirectoriesTree = fileTree(project.buildDir) {
+    include(
+            "**/classes/**/main/**",
+            "**/intermediates/classes/debug/**",
+            "**/intermediates/javac/debug/*/classes/**", // Android Gradle Plugin 3.2.x support.
+            "**/tmp/kotlin-classes/debug/**"
+    )
+
+    exclude(fileFilter)
+}
+
+private val sourceDirectoriesTree = fileTree("${project.buildDir}") {
+    include(
+            "src/main/java/**",
+            "src/main/kotlin/**",
+            "src/debug/java/**",
+            "src/debug/kotlin/**"
+    )
+}
+
+private val executionDataTree = fileTree(project.buildDir) {
+    include(
+            "outputs/code_coverage/**/*.ec",
+            "jacoco/jacocoTestReportDebug.exec",
+            "jacoco/testDebugUnitTest.exec",
+            "jacoco/test.exec"
+    )
+}
+
+fun JacocoReport.setDirectories() {
+    sourceDirectories.setFrom(sourceDirectoriesTree)
+    classDirectories.setFrom(classDirectoriesTree)
+    executionData.setFrom(executionDataTree)
+}
+
+
+
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
         isNonStable(candidate.version)
@@ -96,18 +133,20 @@ tasks.withType<Test> {
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
-        xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
+        xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
+        //xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
         csv.required.set(false)
         html.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
-    sourceDirectories.setFrom(fileTree(projectDir) {
-        include (
-            "**\\src\\main\\java\\**",
-            "**\\src\\main\\kotlin\\**",
-            "**\\src\\debug\\java\\**",
-            "**\\src\\debug\\kotlin\\**")
-    })
+    setDirectories()
+//     sourceDirectories.setFrom(fileTree(projectDir) {
+//         include (
+//             "**\\src\\main\\java\\**",
+//             "**\\src\\main\\kotlin\\**",
+//             "**\\src\\debug\\java\\**",
+//             "**\\src\\debug\\kotlin\\**")
+//     })
     classDirectories.setFrom(fileTree(projectDir) { 
         include ("**\\classes\\**")
     })    
