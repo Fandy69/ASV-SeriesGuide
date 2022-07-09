@@ -87,6 +87,9 @@ jacoco {
 tasks.withType<Test> {
     configure<JacocoTaskExtension> {
         isIncludeNoLocationClasses = true
+        isEnabled = true
+        destinationFile = layout.buildDirectory.file("jacoco/${name}.exec").get().asFile
+        output = JacocoTaskExtension.Output.FILE
     }
 }
 
