@@ -81,8 +81,8 @@ nexusPublishing {
 
 jacoco {
     toolVersion = "0.8.8"
-    applyTo(tasks.bootRun.get())
-//     reportsDirectory.set(layout.buildDirectory.dir("${buildDir}\\jacoco\\"))
+    //applyTo(tasks.bootRun.get())
+    reportsDirectory.set(layout.buildDirectory.dir("${buildDir}\\jacoco\\"))
 }
 
 tasks.register<JacocoReport>("applicationCodeCoverageReport") {
