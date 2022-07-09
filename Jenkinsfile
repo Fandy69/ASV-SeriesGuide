@@ -43,7 +43,7 @@ pipeline {
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )
-                bat "gradlew testCoverage"   // Gaat fout bij Task :jacocoTestReport SKIPPED
+                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"   // testCoverage Gaat fout bij Task :jacocoTestReport SKIPPED
 
                 publishCoverage(
                     adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
