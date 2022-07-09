@@ -94,6 +94,7 @@ tasks.jacocoTestReport {
         xml.required.set(true)
         xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
         csv.required.set(false)
+        html.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
     executionData.setFrom(fileTree(projectDir) { include ("**\\build\\jacoco\\*.exec") })
