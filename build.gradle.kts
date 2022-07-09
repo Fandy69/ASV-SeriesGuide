@@ -98,6 +98,16 @@ tasks.jacocoTestReport {
         html.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
+    sourceDirectories.setFrom(fileTree(projectDir) {
+        include (
+            "**\\src\\main\\java\\**",
+            "**\\src\\main\\kotlin\\**",
+            "**\\src\\debug\\java\\**",
+            "**\\src\\debug\\kotlin\\**")
+    })
+    classDirectories.setFrom(fileTree(projectDir) { 
+        include ("**\\classes\\**")
+    })    
     executionData.setFrom(fileTree(projectDir) { include ("**\\build\\jacoco\\*.exec") })
 }
 
