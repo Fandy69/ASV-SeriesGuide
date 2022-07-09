@@ -93,7 +93,7 @@ tasks.jacocoTestReport {
     //dependsOn(tasks.test)
     reports {
         xml.required.set(true)
-        xml.destination = file("${buildDir}\\reports\\jacoco")
+        xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
         csv.required.set(false)
         html.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
