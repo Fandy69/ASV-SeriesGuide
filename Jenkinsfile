@@ -8,20 +8,15 @@ pipeline {
         }
 
     stages {
-
-//         stage('Clean up') {
-//             steps {
-//                 bat "gradlew widgets:clean billing:clean api:clean app:clean"
-//             }
-//         }
-        stage('Build debug') {
+        stage('Build Debug') {
             steps {
-                echo 'building....'
-                bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+                echo 'Clean UP'
+                bat "gradlew widgets:clean billing:clean api:clean app:clean Custclean"
+                echo 'Build Pure Debug'
+                bat "gradlew widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
             }
         }
-        
-        stage('Build Pure Test') {
+        stage('Build Test') {
             steps {
                 echo 'Build Pure Test with Coverage'
                 bat "set"
@@ -34,28 +29,53 @@ pipeline {
                      api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources \
                      api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
             }
-        }        
+        }
         
-        stage('Test with Coverage') {
+        stage('Test') {
             steps {
-                echo 'Test Build with Coverage'
-                jacoco(
-                    execPattern: '**/build/jacoco/**.exec',
-                    classPattern: '**/classes/*/main'
-                )                
-                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
-            }
-        }        
-
-        stage('Publish Coverage') {
-            steps {
-                echo 'Publish Coverage'
-                publishCoverage(
-                    adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
-                
-                //bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
+                echo 'Test Pure'
+                bat "gradlew app:testPureDebugUnitTest"
             }
         }
+        
+        stage('Test Pure Coverage reports') {
+            steps {
+//                junit '*/build/test-results/testPureDebugUnitTest/*.xml'
+//                junit '**/build/test-results/**/*.xml'
+                jacoco(
+                    execPattern: '**/build/jacoco/**.exec'
+                )
+                bat "gradlew jacocoTestReport --info"
+//                step( publishCoverage(
+//                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
+//                )
+            }
+        }
+
+
+        
+    
+        
+//         stage('Test with Coverage') {
+//             steps {
+//                 echo 'Test Build with Coverage'
+//                 jacoco(
+//                     execPattern: '**/build/jacoco/**.exec',
+//                     classPattern: '**/classes/*/main'
+//                 )                
+//                 bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
+//             }
+//         }        
+
+//         stage('Publish Coverage') {
+//             steps {
+//                 echo 'Publish Coverage'
+//                 publishCoverage(
+//                     adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
+                
+//                 //bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
+//             }
+//         }
         
 //         stage('Test Coverage') {
 //             steps {
