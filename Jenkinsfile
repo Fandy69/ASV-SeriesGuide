@@ -124,10 +124,10 @@ pipeline {
         
     }
     
-  post {
-    always {
-      junit(testResults: '**/build/test-results/**/*.xml', allowEmptyResults : true)
-    }
-  }    
+//   post {
+//     always {
+//       junit(testResults: '**/build/test-results/**/*.xml', allowEmptyResults : true)
+//     }
+//   }    
 }
 
