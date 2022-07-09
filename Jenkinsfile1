@@ -11,16 +11,16 @@ pipeline {
         stage('Build Debug') {
             steps {
                 echo 'Clean UP'
-                bat "gradlew widgets:clean billing:clean api:clean app:clean Custclean"
+                sh "./gradle widgets:clean billing:clean api:clean app:clean Custclean"
                 echo 'Build Pure Debug'
-                bat "gradlew widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
+                sh "./gradle widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
             }
         }
         stage('Build Test') {
             steps {
                 echo 'Build Pure Test with Coverage'
-                bat "set"
-                bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources \
+                sh "set"
+                sh "./gradle widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources \
                      widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources \
                      billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources \
                      billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources \
@@ -34,7 +34,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Test Pure'
-                bat "gradlew app:testPureDebugUnitTest"
+                sh "./gradle  app:testPureDebugUnitTest"
             }
         }
 
@@ -44,7 +44,7 @@ pipeline {
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
                 )
-                bat "gradlew build jacocoTestReport --info"
+                sh "./gradle build jacocoTestReport --info"
 
             }
         }
