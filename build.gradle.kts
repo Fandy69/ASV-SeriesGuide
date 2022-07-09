@@ -59,12 +59,6 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
-//     jacoco {
-//         append = false
-//         destinationFile = file("$buildDir/jacoco/TestNG.exec")
-//         //classDumpFile = file("$buildDir/jacoco/classpathdumps")
-//     }
-
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
         isNonStable(candidate.version)
@@ -84,6 +78,11 @@ nexusPublishing {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory.set(layout.buildDirectory.dir("${buildDir}\\jacoco\\"))
+}
+
 tasks.test {
     //useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
@@ -93,11 +92,11 @@ tasks.jacocoTestReport {
     //dependsOn(tasks.test)
     reports {
         xml.required.set(true)
-        xml.destination = file("${buildDir}/reports/jacoco/jacocoTestReport.xml")
+        xml.destination = file("${buildDir}\\reports\\jacoco\\jacocoTestReport.xml")
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
-    executionData.setFrom("build/jacoco/testPureDebugUnitTest.exec")
+    executionData.setFrom(fileTree(projectDir) { include ("${projectDir}\\**\\build\\jacoco\\*.exec") })
 }
 
 tasks.jacocoTestCoverageVerification {
