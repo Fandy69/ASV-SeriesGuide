@@ -60,16 +60,6 @@ fun isNonStable(version: String): Boolean {
     return isStable.not()
 }
 
-private val fileFilter = mutableSetOf(
-        "**/R.class",
-        "**/R\$*.class",
-        "**/BuildConfig.*",
-        "**/Manifest*.*",
-        "**/*Test*.*",
-        "android/**/*.*",
-        "**/*\$Lambda$*.*", // Jacoco can not handle several "$" in class name.
-        "**/*\$inlined$*.*" // Kotlin specific, Jacoco can not handle several "$" in class name.
-)
 
 private val classDirectoriesTree = fileTree(project.buildDir) {
     include(
@@ -78,8 +68,6 @@ private val classDirectoriesTree = fileTree(project.buildDir) {
             "**/intermediates/javac/debug/*/classes/**", // Android Gradle Plugin 3.2.x support.
             "**/tmp/kotlin-classes/debug/**"
     )
-
-    exclude(fileFilter)
 }
 
 private val sourceDirectoriesTree = fileTree("${project.buildDir}") {
