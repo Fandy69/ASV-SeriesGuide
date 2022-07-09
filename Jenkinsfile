@@ -41,6 +41,7 @@ pipeline {
                 echo 'Test Build with Coverage'
                 jacoco(
                     execPattern: '**/build/jacoco/**.exec'
+                    classPattern: '**/classes/*/main'
                 )                
                 bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
             }
