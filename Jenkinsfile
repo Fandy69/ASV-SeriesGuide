@@ -46,7 +46,7 @@ pipeline {
                 bat "gradlew testCoverage"   // Gaat fout bij Task :jacocoTestReport SKIPPED
 
                 publishCoverage(
-                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
+                    adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
             }
         }
         
