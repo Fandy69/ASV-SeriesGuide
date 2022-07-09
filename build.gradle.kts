@@ -108,7 +108,7 @@ tasks.jacocoTestReport {
     classDirectories.setFrom(fileTree(projectDir) { 
         include ("**\\classes\\**")
     })    
-    executionData.setFrom(fileTree(projectDir) { include ("**\\build\\jacoco\\*.exec") })
+    executionData.setFrom(fileTree(projectDir) { include ("app\\build\\jacoco\\testPureDebugUnitTest.exec") })
 }
 
 tasks.jacocoTestCoverageVerification {
