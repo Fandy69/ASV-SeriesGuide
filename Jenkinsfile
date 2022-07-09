@@ -11,7 +11,7 @@ pipeline {
 
         stage('Clean up') {
             steps {
-                bat "gradlew clean"
+                bat "gradlew widgets:clean billing:clean api:clean app:clean"
             }
         }
 //         stage('Build') {
@@ -21,34 +21,35 @@ pipeline {
 //             }
 //         }
         
-        stage('Test') {
+        stage('Test with Coverage') {
             steps {
-                echo 'test'
-                bat "gradlew app:testPureDebugUnitTest"
+                echo 'Test Build with Coverage'
+                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"
             }
         }        
 
-        stage('Test build') {
+        stage('Publish Coverage') {
             steps {
-                echo 'Test Build'
-                bat "set"
+                echo 'Publish Coverage'
+                publishCoverage(
+                    adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
                 //bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
             }
         }
         
-        stage('Test Coverage') {
-            steps {
-                echo 'Test Build with Coverage'
-                junit '**/build/test-results/**/*.xml'
-                jacoco(
-                    execPattern: '**/build/jacoco/**.exec'
-                )
-                bat "gradlew app:testPureDebugUnitTest jacocoTestReport"   // testCoverage Gaat fout bij Task :jacocoTestReport SKIPPED
+//         stage('Test Coverage') {
+//             steps {
+//                 echo 'Test Build with Coverage'
+//                 junit '**/build/test-results/**/*.xml'
+//                 jacoco(
+//                     execPattern: '**/build/jacoco/**.exec'
+//                 )
+//                 bat "gradlew app:testPureDebugUnitTest jacocoTestReport"   // testCoverage Gaat fout bij Task :jacocoTestReport SKIPPED
 
-                publishCoverage(
-                    adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
-            }
-        }
+//                 publishCoverage(
+//                     adapters: [jacocoAdapter('**/build/reports/jacoco/jacocoTestReport.xml')] )
+//             }
+//         }
         
         stage('SonarQube Analysis') {
              environment {
@@ -67,13 +68,13 @@ pipeline {
              }
         }
         
-        stage('Sonar Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+//         stage('Sonar Quality Gate') {
+//             steps {
+//                 timeout(time: 2, unit: 'MINUTES') {
+//                     waitForQualityGate abortPipeline: true
+//                 }
+//             }
+//         }
 
         stage('Deploy') {
             steps {
