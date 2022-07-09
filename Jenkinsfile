@@ -56,22 +56,22 @@ pipeline {
 //             }
 //         }
         
-        stage('SonarQube Analysis') {
-             environment {
-                 SONARSCANNER_HOME = tool 'SonarQube'
-             }
-             steps {
-                  tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                  withSonarQubeEnv('SonarQube') {
-                      bat "set"
-                      bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
-                      -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
-                      -D sonar.projectKey=ASV-SeriesGuide \
-                      -D sonar.java.binaries=** \
-                      -D sonar.host.url=http://192.168.2.86:9000/"
-                  }
-             }
-        }
+//         stage('SonarQube Analysis') {
+//              environment {
+//                  SONARSCANNER_HOME = tool 'SonarQube'
+//              }
+//              steps {
+//                   tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+//                   withSonarQubeEnv('SonarQube') {
+//                       bat "set"
+//                       bat "${SONARSCANNER_HOME}/bin/sonar-scanner \
+//                       -D sonar.login=sqp_de5218ed22994034126ce0a159c0adef541cc102 \
+//                       -D sonar.projectKey=ASV-SeriesGuide \
+//                       -D sonar.java.binaries=** \
+//                       -D sonar.host.url=http://192.168.2.86:9000/"
+//                   }
+//              }
+//         }
         
 //         stage('Sonar Quality Gate') {
 //             steps {
