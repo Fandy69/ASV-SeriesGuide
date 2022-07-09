@@ -14,12 +14,27 @@ pipeline {
 //                 bat "gradlew widgets:clean billing:clean api:clean app:clean"
 //             }
 //         }
-        stage('Build') {
+        stage('Build debug') {
             steps {
                 echo 'building....'
                 bat "gradlew widgets:clean billing:clean api:clean app:clean widgets:assembleDebug api:assembleDebug billing:assembleDebug app:assemblePureDebug"
             }
         }
+        
+        stage('Build Pure Test') {
+            steps {
+                echo 'Build Pure Test with Coverage'
+                bat "set"
+                bat "gradlew widgets:generateDebugSources widgets:createMockableJar widgets:generateDebugAndroidTestSources \
+                     widgets:compileDebugUnitTestSources widgets:compileDebugAndroidTestSources widgets:compileDebugSources \
+                     billing:generateDebugSources billing:createMockableJar billing:generateDebugAndroidTestSources \
+                     billing:compileDebugUnitTestSources billing:compileDebugAndroidTestSources billing:compileDebugSources \
+                     app:generatePureDebugSources app:createMockableJar app:generatePureDebugAndroidTestSources \
+                     app:compilePureDebugUnitTestSources app:compilePureDebugAndroidTestSources app:compilePureDebugSources \
+                     api:generateDebugSources api:createMockableJar api:generateDebugAndroidTestSources \
+                     api:compileDebugUnitTestSources api:compileDebugAndroidTestSources api:compileDebugSources"
+            }
+        }        
         
         stage('Test with Coverage') {
             steps {
