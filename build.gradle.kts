@@ -41,11 +41,7 @@ buildscript {
         }
     }
 
-    repositories {
-        maven {
-          url("https://plugins.gradle.org/m2/")
-        }
-      }    
+
     
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.2") // libraries, SeriesGuide
@@ -60,6 +56,14 @@ buildscript {
         classpath("gradle.plugin.com.vanniktech:gradle-android-junit-jacoco-plugin:0.16.0")
     }
 }
+allprojects {
+    repositories {
+        maven {
+          url("https://plugins.gradle.org/m2/")
+        }
+      }    
+}
+
 
 fun isNonStable(version: String): Boolean {
     val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
