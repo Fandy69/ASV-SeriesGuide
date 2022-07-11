@@ -4,8 +4,9 @@ plugins {
     id("com.github.ben-manes.versions") version "0.42.0"
     // https://github.com/gradle-nexus/publish-plugin/releases
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
-    id("java")
-    id("jacoco")
+    // id("java")
+    // id("jacoco")
+    id "com.vanniktech.android.junit.jacoco" version "0.16.0"
 }
 
 buildscript {
@@ -40,6 +41,12 @@ buildscript {
         }
     }
 
+    repositories {
+        maven {
+          url "https://plugins.gradle.org/m2/"
+        }
+      }    
+    
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.2") // libraries, SeriesGuide
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -48,8 +55,9 @@ buildscript {
         // https://firebase.google.com/support/release-notes/android
         classpath("com.google.gms:google-services:4.3.10")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
-        classpath("org.jacoco:org.jacoco.ant:0.8.5")
-        classpath("org.jacoco:org.jacoco.core:0.8.8")
+        // classpath("org.jacoco:org.jacoco.ant:0.8.5")
+        // classpath("org.jacoco:org.jacoco.core:0.8.8")
+        classpath("gradle.plugin.com.vanniktech:gradle-android-junit-jacoco-plugin:0.16.0")
     }
 }
 
