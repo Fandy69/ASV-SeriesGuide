@@ -41,8 +41,12 @@ buildscript {
         }
     }
 
+      repositories {
+        maven {
+          url = uri("https://plugins.gradle.org/m2/")
+        }
+      }
 
-    
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.2") // libraries, SeriesGuide
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -56,13 +60,7 @@ buildscript {
         classpath("gradle.plugin.com.vanniktech:gradle-android-junit-jacoco-plugin:0.16.0")
     }
 }
-allprojects {
-    repositories {
-        maven {
-          url("https://plugins.gradle.org/m2/")
-        }
-      }    
-}
+apply(plugin = "com.vanniktech.android.junit.jacoco")
 
 
 fun isNonStable(version: String): Boolean {
