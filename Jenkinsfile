@@ -49,9 +49,11 @@ pipeline {
                     execPattern: '**/build/jacoco/**.exec'
                 )
                 bat "gradlew jacocoTestReport --info"
-//                step( publishCoverage(
-//                    adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] )
-//                )
+                step( 
+                        //publishCoverage(adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] 
+                        publishCoverage(adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]        
+                    )
+                )
             }
         }
 
