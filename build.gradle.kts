@@ -205,6 +205,17 @@ val testCoverage by tasks.registering {
     tasks.findByName("jacocoTestCoverageVerification")?.mustRunAfter(jacocoTestReport)
 }
 
+junitJacoco {
+  jacocoVersion = '0.8.3' // type String
+  ignoreProjects = [] // type String array
+  excludes // type String List
+  includeNoLocationClasses = false // type boolean
+  includeInstrumentationCoverageInMergedReport = false // type boolean
+  xml.enabled = true
+  csv.enabled = true
+  html.enabled = true
+}
+
 
 // tasks.register("clean", Delete::class) {
 //     group = "build"
