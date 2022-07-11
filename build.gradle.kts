@@ -6,7 +6,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0" // api
     // id("java")
     // id("jacoco")
-    id "com.vanniktech.android.junit.jacoco" version "0.16.0"
+    id("com.vanniktech.android.junit.jacoco") version "0.16.0"
 }
 
 buildscript {
