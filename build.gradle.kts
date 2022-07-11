@@ -163,7 +163,7 @@ nexusPublishing {
 // }
 
 tasks.junitJacoco {
-    jacocoVersion = '0.8.3' // type String
+    jacocoVersion = "0.8.3" // type String
     ignoreProjects = [] // type String array
     excludes // type String List
     includeNoLocationClasses = false // type boolean
