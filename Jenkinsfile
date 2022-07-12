@@ -31,12 +31,12 @@ pipeline {
             }
         }
         
-        stage('Test') {
-            steps {
-                echo 'Test Pure'
-                bat "gradlew app:testPureDebugUnitTest"
-            }
-        }
+//         stage('Test') {
+//             steps {
+//                 echo 'Test Pure'
+//                 bat "gradlew app:testPureDebugUnitTest"
+//             }
+//         }
 
         
         stage('Test Pure Coverage reports') {
@@ -48,7 +48,7 @@ pipeline {
 //                 jacoco(
 //                     execPattern: '**/build/jacoco/**.exec'
 //                 )
-                bat "gradlew jacocoTestReport --info"
+                bat "gradlew app:testPureDebugUnitTest jacocoTestReport --info"
                 step( 
                         //publishCoverage(adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] 
                         publishCoverage(adapters: [jacocoAdapter('target/site/jacoco/jacoco.xml')]        
