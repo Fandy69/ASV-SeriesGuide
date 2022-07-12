@@ -57,6 +57,8 @@ buildscript {
         classpath("org.jacoco:org.jacoco.ant:0.8.5")
         classpath("org.jacoco:org.jacoco.core:0.8.9")
         classpath("org.jacoco:org.jacoco.agent:0.8.9")
+        classpath("org.jacoco:org.jacoco.report.xml:0.8.9")
+        
 //         classpath("gradle.plugin.com.vanniktech:gradle-android-junit-jacoco-plugin:0.16.0")
     }
 }
