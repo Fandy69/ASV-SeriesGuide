@@ -73,38 +73,38 @@ fun isNonStable(version: String): Boolean {
 }
 
 
-// private val classDirectoriesTree = fileTree(project.buildDir) {
-//     include(
-//             "**/classes/**/main/**",
-//             "**/intermediates/classes/debug/**",
-//             "**/intermediates/javac/debug/*/classes/**", // Android Gradle Plugin 3.2.x support.
-//             "**/tmp/kotlin-classes/debug/**"
-//     )
-// }
+private val classDirectoriesTree = fileTree(project.buildDir) {
+    include(
+            "**/classes/**/main/**",
+            "**/intermediates/classes/debug/**",
+            "**/intermediates/javac/debug/*/classes/**", // Android Gradle Plugin 3.2.x support.
+            "**/tmp/kotlin-classes/debug/**"
+    )
+}
 
-// private val sourceDirectoriesTree = fileTree("${project.buildDir}") {
-//     include(
-//             "src/main/java/**",
-//             "src/main/kotlin/**",
-//             "src/debug/java/**",
-//             "src/debug/kotlin/**"
-//     )
-// }
+private val sourceDirectoriesTree = fileTree("${project.buildDir}") {
+    include(
+            "src/main/java/**",
+            "src/main/kotlin/**",
+            "src/debug/java/**",
+            "src/debug/kotlin/**"
+    )
+}
 
-// private val executionDataTree = fileTree(project.buildDir) {
-//     include(
-//             "outputs/code_coverage/**/*.ec",
-//             "jacoco/jacocoTestReportDebug.exec",
-//             "jacoco/testDebugUnitTest.exec",
-//             "jacoco/test.exec"
-//     )
-// }
+private val executionDataTree = fileTree(project.buildDir) {
+    include(
+            "outputs/code_coverage/**/*.ec",
+            "jacoco/jacocoTestReportDebug.exec",
+            "jacoco/testDebugUnitTest.exec",
+            "jacoco/test.exec"
+    )
+}
 
-// fun JacocoReport.setDirectories() {
-//     sourceDirectories.setFrom(sourceDirectoriesTree)
-//     classDirectories.setFrom(classDirectoriesTree)
-//     executionData.setFrom(executionDataTree)
-// }
+fun JacocoReport.setDirectories() {
+    sourceDirectories.setFrom(sourceDirectoriesTree)
+    classDirectories.setFrom(classDirectoriesTree)
+    executionData.setFrom(executionDataTree)
+}
 
 
 
