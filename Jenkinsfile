@@ -45,9 +45,9 @@ pipeline {
 //                junit '**/build/test-results/**/*.xml'
                 
 
-                jacoco(
-                    execPattern: '**/build/jacoco/**.exec'
-                )
+//                 jacoco(
+//                     execPattern: '**/build/jacoco/**.exec'
+//                 )
                 bat "gradlew jacocoTestReport --info"
                 step( 
                         //publishCoverage(adapters: [jacocoAdapter('build/reports/jacoco/test/jacocoTestReport.xml')] 
